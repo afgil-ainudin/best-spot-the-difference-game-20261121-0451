@@ -18,8 +18,11 @@ the clock runs out.
 ## How it plays
 
 - Click a difference on **either** picture. A found difference gets a
-  numbered gold ring on both panels and a two-note chime; the counter reads
-  `Found n / total · m left`.
+  gold ring with a ✓ check on both panels and a two-note chime; the
+  counter reads `Found n / total · m left`, and a **Found:** line under
+  the pictures names every difference found so far.
+- **Streak**: consecutive finds without a miss build a streak (`Streak ×n`
+  in the HUD, in gold from ×2); a wrong click breaks it back to zero.
 - A wrong click costs 3 seconds and leaves a brief red ✕ where it landed.
 - **Hints** (3 per round, the 💡 button or `H`): a green ring pulses for
   2.5 seconds around an unfound difference.
@@ -62,8 +65,9 @@ Four real renders of the game's own code, taken in desktop Chrome via
 Playwright with `?shot=` scenes (`shots.js` stages each one from the real
 game state and sets `window.__shotReady`):
 
-1. `1-play.jpg` (cover) — mid-game: 3 of 7 found, gold rings on both
-   panels, 4 left, the counter and clock visible.
+1. `1-play.jpg` (cover) — mid-game: 4 of 7 found, gold ✓ rings on both
+   panels, 3 left, the counter, clock, `Streak ×4` and the Found list
+   naming all four finds.
 2. `2-start.jpg` — the title screen over the lane.
 3. `3-hint.jpg` — a hint pulsing on an unfound difference.
 4. `4-win.jpg` — round complete: all 7 found, the score and time bonus.
