@@ -23,7 +23,7 @@ export function createRenderer(el, handlers) {
   function markerHtml(diff, index, kind) {
     const left = `${(diff.x / 640) * 100}%`;
     const top = `${(diff.y / 460) * 100}%`;
-    const label = kind === 'found' ? String(index) : '?';
+    const label = kind === 'found' ? '✓' : '?';
     return `<div class="marker ${kind}" style="left:${left};top:${top}"><span>${label}</span></div>`;
   }
 
@@ -66,6 +66,9 @@ export function createRenderer(el, handlers) {
     el.counter.textContent = `Found ${game.found.size} / ${total} · ${total - game.found.size} left`;
     el.score.textContent = `Score ${game.score}`;
     el.best.textContent = `Best ${game.best}`;
+    el.streak.textContent = game.streak >= 2 ? `Streak ×${game.streak}` : '';
+    const names = game.round.differences.filter((d) => game.found.has(d.id)).map((d) => `✓ ${d.label}`);
+    el.foundList.textContent = names.length ? `Found: ${names.join(' · ')}` : 'Found: —';
     el.hintCount.textContent = `Hints ${game.hintsLeft}`;
     el.hintBtn.disabled = game.hintsLeft <= 0 || game.screen !== 'play';
   }

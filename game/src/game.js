@@ -27,6 +27,7 @@ export function createGame(onEvent) {
   let lastTickSecond = -1;
   let screen = SCREEN_TITLE;
   let roundBonus = 0;
+  let streak = 0;
 
   function round() { return ROUNDS[roundIndex]; }
 
@@ -39,6 +40,7 @@ export function createGame(onEvent) {
     lastFindLabel = '';
     lastTickSecond = -1;
     roundBonus = 0;
+    streak = 0;
   }
 
   function start() {
@@ -59,6 +61,7 @@ export function createGame(onEvent) {
       if (dx * dx + dy * dy <= diff.r * diff.r) {
         found.add(diff.id);
         score += POINTS_PER_FIND;
+        streak += 1;
         lastFindLabel = diff.label;
         onEvent('find', diff);
         if (found.size === round().differences.length) finishRound();
@@ -66,6 +69,7 @@ export function createGame(onEvent) {
       }
     }
     timeLeft = Math.max(0, timeLeft - MISS_PENALTY_SECONDS);
+    streak = 0;
     onEvent('miss');
     return null;
   }
@@ -134,6 +138,8 @@ export function createGame(onEvent) {
     get lastFindLabel() { return lastFindLabel; },
     get roundBonus() { return roundBonus; },
     set roundBonus(value) { roundBonus = value; },
+    get streak() { return streak; },
+    set streak(value) { streak = value; },
     remaining,
     start,
     resetRound,

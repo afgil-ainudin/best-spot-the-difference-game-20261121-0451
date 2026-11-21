@@ -10,10 +10,11 @@ import { SCREEN_ROUND_END, SCREEN_TITLE } from './game.js';
 export function stageShot(name, game) {
   game.start();
   if (name === 'play') {
-    const firstThree = ROUNDS[0].differences.slice(0, 3);
-    for (const diff of firstThree) game.found.add(diff.id);
+    const firstFour = ROUNDS[0].differences.slice(0, 4);
+    for (const diff of firstFour) game.found.add(diff.id);
     game.timeLeft = 107;
-    game.score = 150;
+    game.score = 200;
+    game.streak = 4;
     return null;
   }
   if (name === 'hint') {
