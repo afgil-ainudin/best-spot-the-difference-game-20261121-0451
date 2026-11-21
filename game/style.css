@@ -1,0 +1,167 @@
+/* Lantern Lane — the whole look of the game. Dark night-market colours,
+   warm lantern gold for the things that matter. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #14101d;
+  color: #f4ead8;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+#app { max-width: 1280px; margin: 0 auto; padding: 10px 14px 6px; }
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: #241d3a;
+  border: 1px solid #3a2f5c;
+  border-radius: 12px;
+  padding: 8px 14px;
+}
+
+.brand { display: flex; align-items: baseline; gap: 12px; }
+.brand h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  color: #ffb454;
+}
+#round-name { color: #b9a8d6; font-size: 14px; }
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+  font-size: 15px;
+}
+.timer {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #ffd28a;
+}
+.timer.low { color: #ff6b5e; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0.55; } }
+#counter { font-weight: 600; }
+
+.controls { display: flex; gap: 8px; }
+.controls button, .card button {
+  font: inherit;
+  font-size: 14px;
+  color: #f4ead8;
+  background: #3a2f5c;
+  border: 1px solid #574a80;
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.controls button:hover:not(:disabled), .card button:hover { background: #4a3f73; }
+.controls button:disabled { opacity: 0.45; cursor: default; }
+
+#panels {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.panel { position: relative; }
+.panel h2 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b9a8d6;
+}
+.panel .scene { border-radius: 10px; overflow: hidden; border: 1px solid #3a2f5c; }
+.panel .scene svg { display: block; width: 100%; height: auto; }
+.panel .markers { position: absolute; inset: 26px 0 0 0; pointer-events: none; }
+
+.marker {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 3px solid #ffd23e;
+  border-radius: 50%;
+  background: rgba(255, 210, 62, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop 0.25s ease-out;
+}
+.marker span { font-size: 15px; font-weight: 800; color: #ffd23e; text-shadow: 0 1px 3px #000; }
+@keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.marker.hint {
+  border-color: #7ddc8a;
+  background: rgba(125, 220, 138, 0.12);
+  animation: pulse 0.8s ease-in-out infinite;
+}
+.marker.hint span { color: #7ddc8a; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.65; }
+}
+
+.marker.miss { border-color: #ff7a6b; background: rgba(255, 122, 107, 0.14); }
+.marker.miss span { color: #ff7a6b; }
+
+#reticle {
+  display: none;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px dashed #ffd23e;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#help { margin-top: 8px; }
+#help p { margin: 2px 0; font-size: 13px; color: #b9a8d6; }
+#toast {
+  min-height: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #7ddc8a;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#toast.show { opacity: 1; }
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 6, 20, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+#overlay.hidden { display: none; }
+.card {
+  max-width: 520px;
+  margin: 16px;
+  background: #241d3a;
+  border: 1px solid #574a80;
+  border-radius: 14px;
+  padding: 26px 30px;
+  text-align: center;
+}
+.card h1 { margin: 0 0 10px; color: #ffb454; font-size: 30px; }
+.card p { line-height: 1.55; color: #e8ddc8; }
+.card .tagline { font-size: 17px; color: #ffd28a; }
+.card .score-line { font-size: 19px; font-weight: 700; }
+.card .fine { font-size: 13px; color: #b9a8d6; }
+.card button { margin: 6px 4px 0; padding: 10px 20px; font-size: 16px; }
+.card button.primary { background: #b5673f; border-color: #d98a56; }
+.card button.primary:hover { background: #c97a4c; }
+
+#status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

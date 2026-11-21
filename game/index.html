@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lantern Lane — Spot the Difference</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div class="brand">
+      <h1>Lantern Lane</h1>
+      <span id="round-name">Round 1 · Dusk Market</span>
+    </div>
+    <div class="stats">
+      <span id="timer-text" class="timer" title="Time left">2:30</span>
+      <span id="counter" title="Differences found">Found 0 / 7 · 7 left</span>
+      <span id="score" title="Score">Score 0</span>
+      <span id="best" title="Best score">Best 0</span>
+    </div>
+    <div class="controls">
+      <button id="hint-btn" type="button">💡 <span id="hint-count">Hints 3</span></button>
+      <button id="sound-btn" type="button" aria-pressed="true">🔊 Sound on</button>
+      <button id="pause-btn" type="button">⏸ Pause</button>
+      <button id="restart-btn" type="button">↺ Restart</button>
+    </div>
+  </header>
+
+  <main id="panels">
+    <section class="panel" id="panel-a" aria-label="Left picture">
+      <h2>Left — the lane as it was</h2>
+      <div class="scene"></div>
+      <div class="markers"></div>
+    </section>
+    <section class="panel" id="panel-b" aria-label="Right picture">
+      <h2>Right — spot what changed</h2>
+      <div class="scene"></div>
+      <div class="markers"></div>
+    </section>
+    <div id="reticle" aria-hidden="true"></div>
+  </main>
+
+  <footer id="help">
+    <p>Click a difference on either picture — or move with the arrow keys and press Enter. <b>H</b> hint · <b>P</b> pause · <b>R</b> restart · a wrong click costs 3 seconds.</p>
+    <p id="toast" role="status"></p>
+  </footer>
+</div>
+
+<div id="overlay" class="hidden"></div>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
